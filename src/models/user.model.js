@@ -58,7 +58,7 @@ const userSchema=new Schema(
 userSchema.pre("save",async function(next){
     // we use if here because hume jab hi password save bcrypt karna hai jab password modify hua ho
     if(!this.isModified("password")) return next()
-    this.password=bcrypt.hash(this.password,10)
+    this.password=await bcrypt.hash(this.password,10)
     next()
 })
 // password check karne ke liye ye kaam bhi bcrypt kar deta hai
