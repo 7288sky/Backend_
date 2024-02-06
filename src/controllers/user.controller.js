@@ -158,7 +158,31 @@ return res.status(200)
 })
 
 const logoutUser=asyncHandler(async(req,res)=>{
-  
+  // req.user._id hum isliye use kar paa rahe because humne ek middleware likha hai jise routes wali file me logout wale route me inject karaya hai
+
+ await User.findOneAndUpdate(
+    req.user._id,
+    {
+      $set:{
+        refreshToken:undefined
+      }
+    },
+    {
+      new:true
+    }
+  )
+
+  const options={
+    httpOnly:true,
+    secure:true
+  }
+
+  return res
+  .status(200)
+  .clearCookie("accessToken",options)
+  .clearCookie("refreshToken",options)
+  .json(new ApiResponse(200,{},"User loggedOut successFully"))
+
 })
 
-export {registerUser,loginUser}
+export {registerUser,loginUser,logoutUser}
