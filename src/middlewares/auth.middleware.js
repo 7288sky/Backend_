@@ -1,12 +1,12 @@
-import { ApiError } from "../utils/ApiError";
-import { asyncHandler } from "../utils/asyncHandler";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken"
-import { User } from "../models/user.model";
-export const verifyJWT= asyncHandler(async(req,res,next)=>{
+import { User } from "../models/user.model.js";
+export const verifyJWT= asyncHandler(async(req,_,next)=>{
     // hum req.cookies isliye kar paa rahe hai because humse req ko cookies ka access de rakha hai =====> app.use(cookies) in app.js
 
 try {
-      const token= req.cookies?.accessToken|| req.header("Authorization")?.replace("Bearer","")
+      const token= req.cookies?.accessToken|| req.header("Authorization")?.replace("Bearer ","")
     
     
         if(!token) {
