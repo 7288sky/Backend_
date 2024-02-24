@@ -7,7 +7,7 @@ import {User} from "../models/user.model.js"
 
 import {uploadOnCloudinary} from "../utils/cloudinary.js" 
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { Jwt } from "jsonwebtoken";
+import  Jwt  from 'jsonwebtoken';
 
 const generateAccessAndRefreshTokens=async(userId)=>{
   try{
